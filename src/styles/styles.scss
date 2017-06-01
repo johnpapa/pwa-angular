@@ -1,0 +1,56 @@
+/* You can add global styles to this file, and also import other style files */
+@import 'mixin';
+
+html, body {
+  font-family: 'Roboto', sans-serif;
+  margin: 0px;
+}
+.content {
+  margin: 1em;
+}
+.ng-title-icon > i {
+  background-image: url("../assets/ng.png");
+}
+.ng-title-icon > i, azfunc-title-icon > i {
+  background-repeat: no-repeat;
+  background-position: center center;
+  padding: 1.2em;
+}
+.title {
+  margin-right: 1em;
+}
+.router-link-active {
+  @include primary-background-contrast-color;
+}
+pre {
+  background-color: map-get($accent, 100);
+  padding: 1em;
+  font-size: 12px;
+  max-width: 260px;
+}
+
+div.content {
+  margin:1em;
+}
+
+.progress {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  margin: 2em 0em;
+}
+
+.snack {
+  @include selected-style;
+}
+
+.pull-right {
+  position:fixed !important;
+  right: 8px;
+}
+
+@media (max-width: 414px) {
+  .pull-right {
+    display: none !important;
+  }
+}

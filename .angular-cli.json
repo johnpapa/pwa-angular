@@ -21,7 +21,9 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "pwa",
       "styles": [
-        "styles.css"
+        "styles/theme.scss",
+        "styles/mixin.scss",
+        "styles/styles.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -53,7 +55,7 @@
     }
   },
   "defaults": {
-    "styleExt": "css",
+    "styleExt": "scss",
     "component": {
       "flat": true,
       "spec": false,

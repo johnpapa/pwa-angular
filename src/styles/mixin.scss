@@ -1,0 +1,102 @@
+@import 'theme';
+
+@mixin primary-color {
+  $primary-color: map-get($primary, 800);
+  color: $primary-color;
+}
+@mixin primary-background-contrast-color {
+  $primary-color: map-get($primary, 400);
+  $font-color: map-get(map-get($primary, contrast), 400);
+  background-color: $primary-color;
+  color: $font-color !important;
+}
+@mixin accent-color {
+  $accent-font-color: map-get($accent, 800);
+  color: $accent-font-color;
+}
+@mixin selected-style {
+  $background-color: map-get($accent, 800);
+  $font-color: map-get(map-get($accent, contrast), 800);
+  background: $background-color !important;
+  color: $font-color !important;
+}
+@mixin hover-style {
+  $background-color: map-get($accent, 400);
+  $font-color: map-get(map-get($accent, contrast), 900);
+  background: $background-color !important;
+  color: $font-color !important;
+}
+@mixin selected-hover-style {
+  $background-color: map-get($accent, 600);
+  $font-color: map-get(map-get($accent, contrast), 600);
+  background: $background-color !important;
+  color: $font-color !important;
+}
+
+
+
+// @mixin primary-color-100 {
+//   $primary-color: map-get($primary, 100);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-200 {
+//   $primary-color: map-get($primary, 200);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-300 {
+//   $primary-color: map-get($primary, 300);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-400 {
+//   $primary-color: map-get($primary, 400);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-500 {
+//   $primary-color: map-get($primary, 500);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-600 {
+//   $primary-color: map-get($primary, 600);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-700 {
+//   $primary-color: map-get($primary, 700);
+//   background-color: $primary-color;
+// }
+// @mixin primary-color-800 {
+//   $primary-color: map-get($primary, 800);
+//   background-color: $primary-color;
+// }
+
+// @mixin accent-color-100 {
+//   $accent-color: map-get($accent, 100);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-200 {
+//   $accent-color: map-get($accent, 200);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-300 {
+//   $accent-color: map-get($accent, 300);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-400 {
+//   $accent-color: map-get($accent, 400);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-500 {
+//   $accent-color: map-get($accent, 500);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-600 {
+//   $accent-color: map-get($accent, 600);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-700 {
+//   $accent-color: map-get($accent, 700);
+//   background-color: $accent-color;
+// }
+// @mixin accent-color-800 {
+//   $accent-color: map-get($accent, 800);
+//   background-color: $accent-color;
+// }
