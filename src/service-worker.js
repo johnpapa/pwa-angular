@@ -2,7 +2,7 @@
 
 var CACHE_NAME = 'starwars-api-site-cache-v1';
 var urlsToCache = [
-  '/',
+  '/'
   // '/0.chunk.js',
   // '/1.chunk.js',
   // '/styles.bundle.js',
