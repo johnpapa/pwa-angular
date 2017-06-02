@@ -2,16 +2,21 @@
 
 var CACHE_NAME = 'starwars-api-site-cache-v1';
 var urlsToCache = [
-  '/'
-  // '/0.chunk.js',
-  // '/1.chunk.js',
-  // '/styles.bundle.js',
-  // '/inline.bundle.js',
-  // '/polyfills.bundle.js',
-  // '/vendor.bundle.js',
-  // '/main.bundle.js'
+  '/',
+  '/index.html',
+  '/0.chunk.js',
+  '/1.chunk.js',
+  '/styles.bundle.js',
+  '/inline.bundle.js',
+  '/polyfills.bundle.js',
+  '/vendor.bundle.js',
+  '/main.bundle.js'
 ];
-
+// var i = 0;
+// function foo() {
+//   console.log('new code detected', i++)
+// }
+// foo();
 self.addEventListener('install', function (event) {
   // Perform install steps
   event.waitUntil(
@@ -58,7 +63,9 @@ self.addEventListener('fetch', function (event) {
 
             return response;
           }
-        );
+        ).catch(function (error) {
+          console.error('fetch failed', error);
+        });
       })
   );
 });
@@ -87,3 +94,10 @@ self.addEventListener('activate', function (event) {
     })
   );
 });
+
+function swLog(eventName, event) {
+  console.log('Service Worker - ' + eventName);
+  if (event) {
+    console.log(event);
+  }
+}

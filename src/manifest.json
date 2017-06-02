@@ -22,7 +22,7 @@
   ],
   "background_color": "#1565c0",
   "theme_color": "#1565c0",
-  "start_url": "./?utm_source=web_app_manifest",
+  "start_url": "./index.html",
   "display": "standalone",
   "orientation": "any"
 }
