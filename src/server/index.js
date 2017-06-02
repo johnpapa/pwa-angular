@@ -12,7 +12,6 @@ app.get('/ping', function (req, res, next) {
   res.send('pong');
 });
 
-
 var staticRoot = __dirname + '/';
 
 app.use(express.static(staticRoot));
