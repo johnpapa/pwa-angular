@@ -4,10 +4,8 @@
 // Pre Cache and Update
 //------------------------------
 
-// TODO: not working on deep links
-
 var CACHE = 'starwars-api-site-cache-v1';
-var urlsToCache = [
+var URLS_TO_CACHE = [
   './',
   './0.chunk.js',
   './1.chunk.js',
@@ -29,8 +27,8 @@ self.addEventListener('install', function (event) {
 // Return a promise resolving when all the assets are added.
 function precache() {
   return caches.open(CACHE).then(function (cache) {
-    console.log('Opening cache and adding the following URLs to it', urlsToCache);
-    return cache.addAll(urlsToCache);
+    console.log('Opening cache and adding the following URLs to it', URLS_TO_CACHE);
+    return cache.addAll(URLS_TO_CACHE);
   });
 }
 
@@ -56,7 +54,7 @@ function fromCache(request) {
   swLog('searching the cache for ' + request.url);
   return caches.open(CACHE).then(function (cache) {
     return cache.match(request).then(function (matching) {
-      return matching || Promise.reject('no-match');
+      return matching; // || Promise.reject('no-match');
     });
   });
 }

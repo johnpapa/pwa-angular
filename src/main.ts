@@ -8,7 +8,15 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .then(() => {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/sw.js')
+        .then(registration => console.log('SW registration successful with scope: ', registration.scope));
+    }
+  });
+
   // then(() => registerServiceWorker());
 
 // function registerServiceWorker() {

@@ -1,6 +1,8 @@
+registerServiceWorker();
+
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then(function (registration) {
+    navigator.serviceWorker.register('/sw.js').then(function (registration) {
 
       swLog('Registration successful', registration);
 
@@ -24,7 +26,7 @@ function registerServiceWorker() {
               break;
 
             default:
-              swLog(installingWorker.state);
+              swLog('State = ', installingWorker.state);
               break;
           }
         };
@@ -34,7 +36,7 @@ function registerServiceWorker() {
     });
   }
 
-  function swLog(eventName, event?) {
+  function swLog(eventName, event) {
     console.log('Service Worker - ' + eventName);
     if (event) {
       console.log(event);
