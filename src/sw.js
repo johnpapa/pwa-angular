@@ -1,5 +1,9 @@
 // https://developers.google.com/web/fundamentals/getting-started/primers/service-workers
 
+//------------------------------
+// Pre Cache and Update
+//------------------------------
+
 // TODO: not working on deep links
 
 var CACHE = 'starwars-api-site-cache-v1';

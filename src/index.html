@@ -12,5 +12,15 @@
 </head>
 <body>
   <pwa-root>Loading...</pwa-root>
+
+  <script defer>
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.register('/worker-basic.js').then(() => {
+        console.log('Angular service worker installed')
+      }, err => {
+        console.error('Angular service worker error:', err);
+      });
+    }
+  </script>
 </body>
 </html>

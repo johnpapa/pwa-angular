@@ -11,7 +11,8 @@
         "assets",
         "favicon.ico",
         "manifest.json",
-        "service-worker.js"
+        "sw.js",
+        "register-sw.js"
       ],
       "index": "index.html",
       "main": "main.ts",

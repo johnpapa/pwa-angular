@@ -1,5 +1,9 @@
 // https://developers.google.com/web/fundamentals/getting-started/primers/service-workers
 
+//------------------------------
+// Pre Cache and Update, custom style
+//------------------------------
+
 var CACHE = 'starwars-api-site-cache-v1';
 var urlsToCache = [
   '/',
