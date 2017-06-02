@@ -12,7 +12,11 @@
         "favicon.ico",
         "manifest.json",
         "sw.js",
-        "register-sw.js"
+        {
+          "glob": "index.js",
+          "input": "./server/",
+          "output": "./"
+        }
       ],
       "index": "index.html",
       "main": "main.ts",

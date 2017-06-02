@@ -19,24 +19,22 @@ var URLS_TO_CACHE = [
 self.addEventListener('install', function (event) {
   // Ask the service worker to keep installing
   // until the returning promise resolves.
-  event.waitUntil(precache());
+  event.waitUntil(preCache());
 });
 
 // Open a cache and use addAll() with an array of assets
 // to add all of them to the cache.
 // Return a promise resolving when all the assets are added.
-function precache() {
+function preCache() {
   return caches.open(CACHE).then(function (cache) {
     console.log('Opening cache and adding the following URLs to it', URLS_TO_CACHE);
     return cache.addAll(URLS_TO_CACHE);
   });
 }
 
-// On fetch, use cache but update the entry with the latest contents
-// from the server.
+// On fetch, use cache but update the entry
+// with the latest contents from the server.
 self.addEventListener('fetch', function (event) {
-  swLog('serving the asset');
-
   // Use respondWith() to answer immediately,
   // without waiting for the network response
   // to reach the service worker…
@@ -72,6 +70,7 @@ function update(request) {
 }
 
 self.addEventListener('activate', function (event) {
+  swLog('activate event fired', event);
   // Let's say we have one cache called 'my-site-cache-v1',
   // and we find that we want to split this out into one cache for
   // pages and one cache for blog posts.This means in the install
