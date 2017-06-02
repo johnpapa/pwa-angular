@@ -52,7 +52,7 @@ function fromCache(request) {
   swLog('searching the cache for ' + request.url);
   return caches.open(CACHE).then(function (cache) {
     return cache.match(request).then(function (matching) {
-      return matching; // || Promise.reject('no-match');
+      return matching || Promise.reject('no-match');
     });
   });
 }
