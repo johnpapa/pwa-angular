@@ -4,8 +4,8 @@
 // Pre Cache and Update
 //------------------------------
 
-var CACHE = 'starwars-api-site-cache-v1';
-var URLS_TO_CACHE = [
+const CACHE = 'starwars-api-site-cache-v1';
+const URLS_TO_CACHE = [
   '/',
   '/offline.html',
   '/0.chunk.js',
@@ -17,7 +17,7 @@ var URLS_TO_CACHE = [
   '/main.bundle.js'
 ];
 
-self.addEventListener('install', function (event) {
+self.addEventListener('install', event => {
   // We can kick the old version ou,
   // but then we're controlling a page loaded
   // with an older version of a service worker.
@@ -33,7 +33,7 @@ self.addEventListener('install', function (event) {
 // to add all of them to the cache.
 // Return a promise resolving when all the assets are added.
 function preCache() {
-  return caches.open(CACHE).then(function (cache) {
+  return caches.open(CACHE).then(cache => {
     console.log('Opening cache and adding the following URLs to it', URLS_TO_CACHE);
     return cache.addAll(URLS_TO_CACHE);
   });
@@ -41,7 +41,7 @@ function preCache() {
 
 // On fetch, use cache but update the entry
 // with the latest contents from the server.
-self.addEventListener('fetch', function (event) {
+self.addEventListener('fetch', event => {
   // Use respondWith() to answer immediately,
   // without waiting for the network response
   // to reach the service worker…
@@ -57,9 +57,9 @@ self.addEventListener('fetch', function (event) {
 // but it does with `undefined` as value.
 function fromCache(request) {
   swLog('searching the cache for ' + request.url);
-  return caches.open(CACHE).then(function (cache) {
+  return caches.open(CACHE).then(cache => {
     console.log('trying to match', request);
-    return cache.match(request).then(function (matching) {
+    return cache.match(request).then(matching => {
       // The match() method of the Cache interface returns a Promise
       // that resolves to the Response associated with the
       // first matching request in the Cache object.
@@ -69,11 +69,12 @@ function fromCache(request) {
         return matching; // || Promise.reject('no-match');
       } else {
         swLog('match not found. request mode ===  ' + request.mode + ', fetching ...', request);
-        return fetch(request).then(function (response) {
+        return fetch(request).then(response => {
           swLog('updating the cache with ' + request.url);
-          cache.put(request, response.clone());
+          const responseClone = response.clone();
+          cache.put(request, responseClone);
           return response;
-        }).catch(function (error) {
+        }).catch(error => {
           swLog('error while fetching', error);
           if (request.mode === 'navigate') {
             swLog('return offline html');
@@ -90,15 +91,15 @@ function fromCache(request) {
 // performs a network request
 // and stores the new response data.
 function update(request) {
-  return caches.open(CACHE).then(function (cache) {
-    return fetch(request).then(function (response) {
+  return caches.open(CACHE).then(cache => {
+    return fetch(request).then(response => {
       swLog('updating the cache with ' + request.url);
       return cache.put(request, response);
     });
   });
 }
 
-self.addEventListener('activate', function (event) {
+self.addEventListener('activate', event => {
   swLog('activate event fired', event);
   // Let's say we have one cache called 'my-site-cache-v1',
   // and we find that we want to split this out into one cache for
@@ -114,8 +115,8 @@ self.addEventListener('activate', function (event) {
   // we use waitUntil() to prevent the worker
   // to be killed until the cache is updated.
   event.waitUntil(
-    caches.keys().then(function (cacheNames) {
-      return Promise.all(cacheNames.map(function (cacheName) {
+    caches.keys().then(cacheNames => {
+      return Promise.all(cacheNames.map(cacheName => {
         if (!expectedCaches.includes(cacheName)) {
           swLog('deleting cache: ' + cacheName);
           return caches.delete(cacheName);
