@@ -6,14 +6,14 @@
 
 var CACHE = 'starwars-api-site-cache-v1';
 var URLS_TO_CACHE = [
-  '',
-  '0.chunk.js',
-  '1.chunk.js',
-  'styles.bundle.js',
-  'inline.bundle.js',
-  'polyfills.bundle.js',
-  'vendor.bundle.js',
-  'main.bundle.js'
+  './',
+  './0.chunk.js',
+  './1.chunk.js',
+  './styles.bundle.js',
+  './inline.bundle.js',
+  './polyfills.bundle.js',
+  './vendor.bundle.js',
+  './main.bundle.js'
 ];
 
 self.addEventListener('install', function (event) {

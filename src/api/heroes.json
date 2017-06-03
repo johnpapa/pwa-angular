@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "Luke Skywalker",
+    "allegiance": "jedi"
+  },
+  {
+    "id": 2,
+    "name": "C-3PO",
+    "allegiance": "rebel"
+  },
+  {
+    "id": 3,
+    "name": "R2-D2",
+    "allegiance": "rebel"
+  },
+  {
+    "id": 5,
+    "name": "Leia Organa",
+    "allegiance": "rebel"
+  },
+  {
+    "id": 10,
+    "name": "Obi-Wan Kenobi",
+    "allegiance": "jedi"
+  },
+  {
+    "id": 13,
+    "name": "Chewbacca",
+    "allegiance": "rebel"
+  },
+  {
+    "id": 14,
+    "name": "Han Solo",
+    "allegiance": "rebel"
+  },
+  {
+    "id": 17,
+    "name": "Wedge Antilles",
+    "allegiance": "rebel"
+  }
+]

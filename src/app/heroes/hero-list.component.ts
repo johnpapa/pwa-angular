@@ -1,21 +1,24 @@
 import { Component, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'pwa-hero-list',
   template: `
     <div class="content">
-    <p>
-      hero-list Works!
-    </p>
+      hero-list works!
+    <ul><li *ngFor="let h of heroes">{{h.name}}</li></ul>
     </div>
   `,
   styles: []
 })
 export class HeroListComponent implements OnInit {
+  heroes: any;
 
-  constructor() { }
+  constructor(private http: Http) { }
 
   ngOnInit() {
+    this.http.get('/api/heroes.json')
+      .map(response => response.json())
+      .subscribe(heroes => this.heroes = heroes);
   }
-
 }

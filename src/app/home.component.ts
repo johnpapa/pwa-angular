@@ -4,18 +4,13 @@ import { Component, OnInit } from '@angular/core';
   selector: 'pwa-home',
   template: `
     <div class="content">
-    <p>
-      home Works!
-    </p>
+      home works!
     </div>
   `,
   styles: []
 })
 export class HomeComponent implements OnInit {
-
   constructor() { }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {  }
 }

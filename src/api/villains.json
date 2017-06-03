@@ -1,0 +1,17 @@
+[
+  {
+    "id": 4,
+    "name": "Darth Vader",
+    "allegiance": "sith"
+  },
+  {
+    "id": 11,
+    "name": "Anakin Skywalker",
+    "allegiance": "jedi"
+  },
+  {
+    "id": 15,
+    "name": "Greedo",
+    "allegiance": "bounty hunter"
+  }
+]
