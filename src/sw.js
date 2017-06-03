@@ -71,8 +71,10 @@ function fromCache(request) {
         swLog('match not found. request mode ===  ' + request.mode + ', fetching ...', request);
         return fetch(request).then(function (response) {
           swLog('updating the cache with ' + request.url);
-          return cache.put(request, response);
-        }).catch(function () {
+          cache.put(request, response.clone());
+          return response;
+        }).catch(function (error) {
+          swLog('error while fetching', error);
           if (request.mode === 'navigate') {
             swLog('return offline html');
             return caches.match('/offline.html');
