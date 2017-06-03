@@ -1,0 +1,56 @@
+{
+  "external": {
+    "urls": []
+  },
+  "static.ignore": [
+    "\\.js\\.map$"
+  ],
+  "static.versioned": [
+    "\\.[0-9a-z]{20}\\."
+  ],
+  "dynamic": {
+    "group": [
+      {
+        "name": "data",
+        "urls": {
+          "http://localhost:4200/api": {
+            "match": "prefix"
+          }
+        },
+        "cache": {
+          "optimizeFor": "performance",
+          "maxAgeMs": 360000000,
+          "maxEntries": 40,
+          "strategy": "lru"
+        }
+      },
+      {
+        "name": "offline",
+        "urls": {
+          "http://localhost:4200/api": {
+            "match": "prefix"
+          }
+        },
+        "cache": {
+          "optimizeFor": "freshness",
+          "maxAgeMs": 360000000,
+          "maxEntries": 1,
+          "strategy": "lru"
+        }
+      }
+    ]
+  },
+  "routing": {
+    "index": "/index.html",
+    "routes": {
+      "/": {"prefix": false },
+      "/home": {"prefix": true },
+      "/heroes": {"prefix": false },
+      "/villains": {"prefix": false }
+    }
+  },
+  "push": {
+    "showNotifications": true,
+    "backgroundOnly": true
+  }
+}

@@ -11,7 +11,6 @@
         "assets",
         "favicon.ico",
         "manifest.json",
-        "sw.js",
         "api",
         {
           "glob": "index.js",
@@ -26,6 +25,7 @@
       "tsconfig": "tsconfig.app.json",
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "pwa",
+      "serviceWorker": true,
       "styles": [
         "styles/theme.scss",
         "styles/mixin.scss",
