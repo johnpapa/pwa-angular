@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() { }
 
   sendMessages() {
-    const message = `Message # ${this.i++}`
+    const message = `Message # ${this.i++}`;
     addToOutBox(message)
       .then(() => navigator.serviceWorker.ready)
       .then((reg) => registerSyncEvent(reg))
