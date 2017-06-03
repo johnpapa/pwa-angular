@@ -42,6 +42,15 @@ function preCache() {
 // On fetch, use cache but update the entry
 // with the latest contents from the server.
 self.addEventListener('fetch', event => {
+  // In "lie-fi" environments, with awfully slow wifi,
+  // the user will see the app shell while we load.
+  // TODO: Ideally this should be the same shell our app uses.
+  // const url = new URL(event.request.url);
+  // if (url.origin === location.origin && url.pathname === '/') {
+  //   event.respondWith(caches.match('/shell.html'));
+  //   return;
+  // }
+
   // Use respondWith() to answer immediately,
   // without waiting for the network response
   // to reach the service worker…
