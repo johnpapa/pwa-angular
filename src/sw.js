@@ -68,12 +68,17 @@ function fromCache(request) {
         swLog('found a match', matching);
         return matching; // || Promise.reject('no-match');
       } else {
-        swLog('match not found. request mode ===  ' + request.mode);
-        if (request.mode === 'navigate') {
-          swLog('return offline html');
-          return caches.match('/offline.html');
-        }
-        swLog('no match found and not navigating, so we return undefined');
+        swLog('match not found. request mode ===  ' + request.mode + ', fetching ...', request);
+        return fetch(request).then(function (response) {
+          swLog('updating the cache with ' + request.url);
+          return cache.put(request, response);
+        }).catch(function () {
+          if (request.mode === 'navigate') {
+            swLog('return offline html');
+            return caches.match('/offline.html');
+          }
+          swLog('no match found and not navigating, so we return undefined');
+        })
       }
     })
   });
