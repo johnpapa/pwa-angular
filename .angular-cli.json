@@ -13,6 +13,7 @@
         "manifest.json",
         "sw.js",
         "api",
+        "offline.html",
         {
           "glob": "index.js",
           "input": "./server/",
