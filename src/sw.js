@@ -1,8 +1,8 @@
 // https://developers.google.com/web/fundamentals/getting-started/primers/service-workers
 
-//------------------------------
+// ------------------------------
 // Pre Cache and Update
-//------------------------------
+// ------------------------------
 
 const CACHE = 'starwars-api-site-cache-v1';
 const URLS_TO_CACHE = [
@@ -90,9 +90,9 @@ function fromCache(request) {
             return caches.match('/offline.html');
           }
           swLog('no match found and not navigating, so we return undefined');
-        })
+        });
       }
-    })
+    });
   });
 }
 
@@ -119,7 +119,7 @@ self.addEventListener('activate', event => {
   // The following code would do this by looping through all of the
   // caches in the service worker and deleting any caches that
   // aren't defined in the cache whitelist.
-  var expectedCaches = [CACHE, 'some-other-cache-v1'];
+  const expectedCaches = [CACHE, 'some-other-cache-v1'];
 
   // we use waitUntil() to prevent the worker
   // to be killed until the cache is updated.
