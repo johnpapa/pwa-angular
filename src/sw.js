@@ -141,3 +141,36 @@ function swLog(eventName, event) {
     console.log(event);
   }
 }
+
+self.addEventListener('sync', event => {
+  console.log('I heard a sync event!');
+  if (event.tag === 'mySync') {
+    event.waitUntil(
+      getMessagesFromOutbox()
+        .then(messages => sendMessagesToServer(messages))
+        .then(messages => removeMessagesFromOutBox(messages))
+      );
+  }
+});
+
+function getMessagesFromOutbox() {
+  const messages = [
+    'message 1',
+    'message 2',
+    'message 3'
+  ];
+  console.log('messages retrieved from outbox', messages);
+  return Promise.resolve(messages);
+}
+
+function sendMessagesToServer(messages) {
+  console.log('messages sent!', messages);
+  return Promise.resolve(messages);
+}
+
+function removeMessagesFromOutBox(messages) {
+  console.log('messages removed!', messages);
+  return Promise.resolve(messages);
+}
+
+

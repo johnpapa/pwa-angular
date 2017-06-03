@@ -14,7 +14,6 @@ platformBrowserDynamic().bootstrapModule(AppModule)
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js').then(function (registration) {
-
       swLog('Registration successful', registration);
 
       registration.onupdatefound = function () {
@@ -42,9 +41,21 @@ function registerServiceWorker() {
           }
         };
       };
-    }).catch(function (e) {
-      console.error('Error during service worker registration:', e);
-    });
+    })
+
+      // .then(() => {
+      //   console.log('navigator.serviceWorker.ready === ', navigator.serviceWorker.ready);
+      //   return navigator.serviceWorker.ready;
+      // })
+
+      // .then(() => {
+      //   console.log('sync registered for send-messages');
+      //   return reg => reg.sync.register('send-messages');
+      // })
+
+      .catch(function (e) {
+        console.error('Error during service worker registration:', e);
+      });
   }
 
   function swLog(eventName, event?) {
