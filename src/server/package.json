@@ -4,6 +4,9 @@
   "scripts": {
     "start": "node index.js"
   },
+  "engines": {
+    "node": "6.9.1"
+  },
   "dependencies": {
     "express": "^4.15.3"
   }
