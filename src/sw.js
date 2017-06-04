@@ -3,8 +3,7 @@
 // ------------------------------
 // Pre Cache and Update
 // ------------------------------
-
-const CACHE = 'starwars-api-site-cache-v1';
+const CACHE = 'pwa-angular-cache-v1';
 const URLS_TO_CACHE = [
   '/',
   '/offline.html',
@@ -34,7 +33,7 @@ self.addEventListener('install', event => {
 // Return a promise resolving when all the assets are added.
 function preCache() {
   return caches.open(CACHE).then(cache => {
-    console.log('Opening cache and adding the following URLs to it', URLS_TO_CACHE);
+    swLog('Opening cache and adding the following URLs to it', URLS_TO_CACHE);
     return cache.addAll(URLS_TO_CACHE);
   });
 }
@@ -67,7 +66,7 @@ self.addEventListener('fetch', event => {
 function fromCache(request) {
   swLog('searching the cache for ' + request.url);
   return caches.open(CACHE).then(cache => {
-    console.log('trying to match', request);
+    swLog('trying to match', request);
     return cache.match(request).then(matching => {
       // The match() method of the Cache interface returns a Promise
       // that resolves to the Response associated with the
@@ -123,17 +122,48 @@ self.addEventListener('activate', event => {
 
   // we use waitUntil() to prevent the worker
   // to be killed until the cache is updated.
-  event.waitUntil(
-    caches.keys().then(cacheNames => {
-      return Promise.all(cacheNames.map(cacheName => {
-        if (!expectedCaches.includes(cacheName)) {
-          swLog('deleting cache: ' + cacheName);
-          return caches.delete(cacheName);
-        }
-      }));
-    })
-  );
+  event.waitUntil(caches.keys().then(cacheNames => {
+    return Promise.all(cacheNames.map(cacheName => {
+      if (!expectedCaches.includes(cacheName)) {
+        swLog('deleting cache: ' + cacheName);
+        return caches.delete(cacheName);
+      }
+    }));
+  }));
 });
+
+self.addEventListener('sync', event => {
+  swLog('I heard a sync event!', event);
+  if (event.tag === 'my-pwa-messages') {
+    event.waitUntil(getMessagesFromOutbox()
+      .then(messages => sendMessagesToServer(messages))
+      .then(messages => removeMessagesFromOutBox(messages))
+    );
+  }
+});
+
+self.importScripts('assets/idb-keyval-min.js');
+
+function getMessagesFromOutbox() {
+  const key = 'pwa-messages';
+  return idbKeyval.get(key).then(values => {
+    values = values || '[]';
+    const messages = JSON.parse(values) || [];
+    swLog('messages retrieved from outbox', messages);
+    return messages;
+  }).catch(err => swLog('unable to get messages from outbox', err));
+}
+
+function sendMessagesToServer(messages) {
+  swLog('messages sent!', messages);
+  return Promise.resolve(messages);
+}
+
+function removeMessagesFromOutBox(messages) {
+  return idbKeyval.clear()
+    .then(() => swLog('messages removed from outbox'))
+    .catch(err => swLog('unable to remove messages from outbox', err));
+}
 
 function swLog(eventName, event) {
   console.log('Service Worker - ' + eventName);
@@ -141,36 +171,3 @@ function swLog(eventName, event) {
     console.log(event);
   }
 }
-
-self.addEventListener('sync', event => {
-  console.log('I heard a sync event!');
-  if (event.tag === 'mySync') {
-    event.waitUntil(
-      getMessagesFromOutbox()
-        .then(messages => sendMessagesToServer(messages))
-        .then(messages => removeMessagesFromOutBox(messages))
-      );
-  }
-});
-
-function getMessagesFromOutbox() {
-  const messages = [
-    'message 1',
-    'message 2',
-    'message 3'
-  ];
-  console.log('messages retrieved from outbox', messages);
-  return Promise.resolve(messages);
-}
-
-function sendMessagesToServer(messages) {
-  console.log('messages sent!', messages);
-  return Promise.resolve(messages);
-}
-
-function removeMessagesFromOutBox(messages) {
-  console.log('messages removed!', messages);
-  return Promise.resolve(messages);
-}
-
-
