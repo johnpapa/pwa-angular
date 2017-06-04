@@ -15,6 +15,11 @@
         "api",
         "offline.html",
         {
+          "glob": "web.config",
+          "input": "./server/",
+          "output": "./"
+        },
+        {
           "glob": "index.js",
           "input": "./server/",
           "output": "./"
