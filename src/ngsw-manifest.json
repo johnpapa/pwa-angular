@@ -11,17 +11,18 @@
   "dynamic": {
     "group": [
       {
-        "name": "data",
+        "name": "online",
         "urls": {
           "http://localhost:4200/api": {
             "match": "prefix"
           }
         },
         "cache": {
-          "optimizeFor": "performance",
-          "maxAgeMs": 360000000,
-          "maxEntries": 40,
-          "strategy": "lru"
+          "optimizeFor": "freshness",
+          "networkTimeoutMs": 200,
+          "maxAgeMs": 1000,
+          "maxEntries": 2,
+          "strategy": "fifo"
         }
       },
       {
@@ -32,10 +33,26 @@
           }
         },
         "cache": {
-          "optimizeFor": "freshness",
-          "maxAgeMs": 360000000,
-          "maxEntries": 1,
+          "optimizeFor": "performance",
+          "networkTimeoutMs": 200,
+          "maxAgeMs": 36000,
+          "maxEntries": 2,
           "strategy": "lru"
+        }
+      },
+      {
+        "name": "something",
+        "urls": {
+          "http://localhost:4200/api": {
+            "match": "prefix"
+          }
+        },
+        "cache": {
+          "optimizeFor": "performance",
+          "networkTimeoutMs": 200,
+          "maxAgeMs": 36000,
+          "maxEntries": 2,
+          "strategy": "lfu"
         }
       }
     ]
@@ -43,10 +60,18 @@
   "routing": {
     "index": "/index.html",
     "routes": {
-      "/": {"prefix": false },
-      "/home": {"prefix": true },
-      "/heroes": {"prefix": false },
-      "/villains": {"prefix": false }
+      "/": {
+        "prefix": false
+      },
+      "/home": {
+        "prefix": true
+      },
+      "/heroes": {
+        "prefix": false
+      },
+      "/villains": {
+        "prefix": false
+      }
     }
   },
   "push": {
