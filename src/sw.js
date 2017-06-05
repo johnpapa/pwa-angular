@@ -166,7 +166,7 @@ function mapMessagesToFetches(messages) {
   return messages.map(
     message => sendPost(message)
       .then(response => response.json())
-      .catch(err => swLog('server unable to handle message', err));
+      .catch(err => swLog('server unable to handle message', err))
   );
 }
 
