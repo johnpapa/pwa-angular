@@ -17,37 +17,41 @@ const twilioSettings = {
   phone: process.env.TWILIO_PHONE
 };
 
-const twilio = require('twilio');
-const client = twilio(twilioSettings.accountSid, twilioSettings.authToken);
-
 app.get('/ping', (req, res, next) => {
   console.log(req.body);
   res.send('pong');
 });
 
 app.post("/messages", (req, res, next) => {
-  var msg = {
-    from: twilioSettings.phone,
-    to: req.body.phone,
-    body: req.body.body
-  };
-  console.log('sending', msg);
-  client.messages.create(msg)
-    .then(data => {
-      if (req.xhr) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify({ result: "success" }));
-      } else {
-        res.redirect("/messages/" + msg.phone + "#" + data.sid);
-      }
-    }).catch(err => {
-      if (req.xhr) {
-        res.setHeader('Content-Type', 'application/json');
-        res.status(err.status).send(JSON.stringify(err));
-      } else {
-        res.redirect(req.header('Referer') || '/');
-      }
-    });
+  try {
+    const twilio = require('twilio');
+    const client = twilio(twilioSettings.accountSid, twilioSettings.authToken);
+
+    var msg = {
+      from: twilioSettings.phone,
+      to: req.body.phone,
+      body: req.body.body
+    };
+    console.log('sending', msg);
+    client.messages.create(msg)
+      .then(data => {
+        if (req.xhr) {
+          res.setHeader('Content-Type', 'application/json');
+          res.send(JSON.stringify({ result: "success" }));
+        } else {
+          res.redirect("/messages/" + msg.phone + "#" + data.sid);
+        }
+      }).catch(err => {
+        if (req.xhr) {
+          res.setHeader('Content-Type', 'application/json');
+          res.status(err.status).send(JSON.stringify(err));
+        } else {
+          res.redirect(req.header('Referer') || '/');
+        }
+      });
+  } catch (error) {
+    console.log('twilio failed, but that\'s ok. We\'ll move along');
+  }
 });
 
 var staticRoot = __dirname + '/';
