@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   template: `
     <md-toolbar color="primary" class="dark">
       <div class="md-toolbar-tools" fxLayout="row nowrap" fxFlex fxLayoutAlign="end center">
-        <a class="ng-title-icon" href="http://angular.io" target="_blank"><i></i></a>
+        <a class="ng-title-icon" href="http://angular.io" target="_blank" rel="noopener"><i></i></a>
         <!--<span fxFlex class="title">One with Angular</span>-->
         <span fxFlex="grow"></span>
         <a fxFlex md-button [routerLink]="['/home']"
@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
           routerLinkActive="router-link-active"><span>heroes</span></a>
         <a fxFlex md-button [routerLink]="['/villains']"
           routerLinkActive="router-link-active"><span>villains</span></a>
-        <a fxFlex class="pull-right" md-button href="http://johnpapa.net" target="_blank"><span>John Papa</span></a>
+        <a fxFlex class="pull-right" md-button href="http://johnpapa.net" target="_blank" rel="noopener"><span>John Papa</span></a>
       </div>
     </md-toolbar>
     <router-outlet></router-outlet>
