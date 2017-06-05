@@ -141,7 +141,8 @@ self.addEventListener('sync', event => {
   swLog('I heard a sync event!', event);
   if (event.tag === 'my-pwa-messages') {
     event.waitUntil(getMessagesFromOutbox()
-      .then(messages => sendMessagesToServer(messages))
+      .then(messages => Promise.all(mapAndSendMessages(messages)))
+      .catch(err => swLog('unable to send messages to server', err))
       .then(response => removeMessagesFromOutBox(response))
     );
   }
@@ -157,16 +158,11 @@ function getMessagesFromOutbox() {
   }).catch(err => swLog('unable to get messages from outbox', err));
 }
 
-function sendMessagesToServer(messages) {
-  return Promise.all(mapMessagesToFetches(messages))
-    .catch(err => swLog('unable to send messages to server', err));
-}
-
-function mapMessagesToFetches(messages) {
+function mapAndSendMessages(messages) {
   return messages.map(
-    message => sendPost(message)
+    message => sendMessage(message)
       .then(response => response.json())
-      .catch(err => swLog('server unable to handle message', err))
+      .catch(err => swLog('server unable to handle the message', message, err))
   );
 }
 
@@ -176,7 +172,7 @@ const headers = {
   'Content-Type': 'application/json'
 };
 
-function sendPost(message) {
+function sendMessage(message) {
   const msg = {
     method: 'POST',
     body: JSON.stringify(message),
@@ -190,7 +186,7 @@ function sendPost(message) {
 
 function removeMessagesFromOutBox(response) {
   // If the first worked,let's assume for now they all did
-  if (response && response.length && response[0].result === 'success') {
+  if (response && response.length && response[0] && response[0].result === 'success') {
     return idbKeyval.clear()
       .then(() => swLog('messages removed from outbox'))
       .catch(err => swLog('unable to remove messages from outbox', err));
