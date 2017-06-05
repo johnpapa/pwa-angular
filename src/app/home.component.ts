@@ -4,25 +4,38 @@ import { Component, OnInit } from '@angular/core';
   selector: 'pwa-home',
   template: `
     <div class="content">
-      home works!
+      <div>home works!</div>
+
+      <md-input-container>
+        <input mdInput placeholder="Phone" [(ngModel)]="message.phone" type="tel">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Message" [(ngModel)]="message.body">
+      </md-input-container>
+      <button md-raised-button color="accent" (click)="sendMessages()" [disabled]="!isValidMessage()">Send Messages</button>
     </div>
-    <button md-button (click)="sendMessages()">Send Messages</button>
   `,
   styles: []
 })
 export class HomeComponent implements OnInit {
   private i = 0;
+  message: { phone: string, body: string } = { phone: undefined, body: undefined };
 
   constructor() { }
 
   ngOnInit() { }
 
+  isValidMessage() {
+    return (this.message && this.message.phone && this.message.body);
+  }
+
   sendMessages() {
-    const message = `Message # ${this.i++}`;
-    addToOutbox(message)
-      .then((msg) => navigator.serviceWorker.ready)
-      .then((reg) => registerSyncEvent(reg))
-      .catch(() => sendMessagesToServer(message));
+    if (this.isValidMessage()) {
+      addToOutbox(this.message)
+        .then((msg) => navigator.serviceWorker.ready)
+        .then((reg) => registerSyncEvent(reg))
+        .catch(() => sendMessagesToServer(this.message));
+    }
   }
 }
 
@@ -46,9 +59,9 @@ declare var idbKeyval;
 
 async function addToOutbox(message) {
   const key = 'pwa-messages';
-  return idbKeyval.get(key).then(values => {
-    values = values || '[]';
-    const messages = JSON.parse(values) || [];
+  return idbKeyval.get(key).then(data => {
+    data = data || '[]';
+    const messages = JSON.parse(data) || [];
     messages.push(message);
     return messages;
   }).then(messages => idbKeyval.set(key, JSON.stringify(messages)))

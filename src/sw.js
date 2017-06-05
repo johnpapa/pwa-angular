@@ -155,14 +155,30 @@ function getMessagesFromOutbox() {
 }
 
 function sendMessagesToServer(messages) {
+  const headers = {
+    'Accept': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json'
+  };
   swLog('messages sent!', messages);
-  return Promise.resolve(messages);
+
+  return Promise.all(messages.map(message =>
+    fetch('/messages', {
+      method: 'POST',
+      body: JSON.stringify(message),
+      headers: headers
+    }).then(response => response.json())
+  )).catch(err => swLog('unable to send messages to server', err));
 }
 
-function removeMessagesFromOutBox(messages) {
-  return idbKeyval.clear()
-    .then(() => swLog('messages removed from outbox'))
-    .catch(err => swLog('unable to remove messages from outbox', err));
+function removeMessagesFromOutBox(data) {
+  // If the first worked,let's assume for now they all did
+  if (data && data.length && data[0].result === 'success') {
+    return idbKeyval.clear()
+      .then(() => swLog('messages removed from outbox'))
+      .catch(err => swLog('unable to remove messages from outbox', err));
+  }
+  return Promise.resolve(true);
 }
 
 function swLog(eventName, event) {

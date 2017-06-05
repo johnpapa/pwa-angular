@@ -6,6 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng b && cd dist && node index.js` for a dev server.
 
+To enabled the twilio texting feature, run
+`TWILIO_ACCOUNT_SID="sid-goes-here" TWILIO_AUTH_TOKEN="auth-token" TWILIO_PHONE="from-phone" node --inspect=5858 index.js`
+
 Q> When are the files cached?
 A> After the first successful load. The app will cache the files in the browser until the service worker changes.
 
