@@ -155,13 +155,6 @@ function getMessagesFromOutbox() {
 }
 
 function sendMessagesToServer(messages) {
-  const headers = {
-    'Accept': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json'
-  };
-  swLog('messages sent!', messages);
-
   return Promise.all(mapMessagesToFetches(messages))
     .catch(err => swLog('unable to send messages to server', err));
 }
@@ -171,17 +164,25 @@ function mapMessagesToFetches(messages) {
 }
 
 function sendPost(message) {
+  const headers = {
+    'Accept': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json'
+  };
   const msg = {
     method: 'POST',
     body: JSON.stringify(message),
     headers: headers
   };
-  return fetch('/messages', msg);
+  return fetch('/messages', msg).then((response) => {
+    swLog('message sent!', message);
+    return response;
+   });
 }
 
-function removeMessagesFromOutBox(data) {
+function removeMessagesFromOutBox(response) {
   // If the first worked,let's assume for now they all did
-  if (data && data.length && data[0].result === 'success') {
+  if (response && response.length && response[0].result === 'success') {
     return idbKeyval.clear()
       .then(() => swLog('messages removed from outbox'))
       .catch(err => swLog('unable to remove messages from outbox', err));
