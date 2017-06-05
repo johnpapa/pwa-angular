@@ -132,17 +132,20 @@ self.addEventListener('activate', event => {
   }));
 });
 
+// -------------------------------------------------------
+// background sync
+// -------------------------------------------------------
+self.importScripts('assets/idb-keyval-min.js');
+
 self.addEventListener('sync', event => {
   swLog('I heard a sync event!', event);
   if (event.tag === 'my-pwa-messages') {
     event.waitUntil(getMessagesFromOutbox()
       .then(messages => sendMessagesToServer(messages))
-      .then(data => removeMessagesFromOutBox(data))
+      .then(response => removeMessagesFromOutBox(response))
     );
   }
 });
-
-self.importScripts('assets/idb-keyval-min.js');
 
 function getMessagesFromOutbox() {
   const key = 'pwa-messages';
@@ -160,15 +163,20 @@ function sendMessagesToServer(messages) {
 }
 
 function mapMessagesToFetches(messages) {
-  return messages.map(message => sendPost(message).then(response => response.json()));
+  return messages.map(
+    message => sendPost(message)
+      .then(response => response.json())
+      .catch(err => swLog('server unable to handle message', err));
+  );
 }
 
+const headers = {
+  'Accept': 'application/json',
+  'X-Requested-With': 'XMLHttpRequest',
+  'Content-Type': 'application/json'
+};
+
 function sendPost(message) {
-  const headers = {
-    'Accept': 'application/json',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json'
-  };
   const msg = {
     method: 'POST',
     body: JSON.stringify(message),
