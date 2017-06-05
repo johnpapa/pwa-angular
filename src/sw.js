@@ -4,6 +4,15 @@
 // Pre Cache and Update
 // ------------------------------
 const CACHE = 'pwa-angular-cache-v1';
+const ROUTES_TO_CACHE = [
+  'home',
+  'heroes',
+  'villains'
+];
+const APIS_TO_CACHE = [
+  'api/heroes.json',
+  'api/villains.json'
+];
 const URLS_TO_CACHE = [
   '/',
   '/offline.html',
@@ -14,7 +23,7 @@ const URLS_TO_CACHE = [
   '/polyfills.bundle.js',
   '/vendor.bundle.js',
   '/main.bundle.js'
-];
+].concat(ROUTES_TO_CACHE, APIS_TO_CACHE);
 
 self.addEventListener('install', event => {
   // We can kick the old version ou,
