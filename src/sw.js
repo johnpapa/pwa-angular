@@ -137,7 +137,7 @@ self.addEventListener('sync', event => {
   if (event.tag === 'my-pwa-messages') {
     event.waitUntil(getMessagesFromOutbox()
       .then(messages => sendMessagesToServer(messages))
-      .then(messages => removeMessagesFromOutBox(messages))
+      .then(data => removeMessagesFromOutBox(data))
     );
   }
 });
@@ -162,13 +162,21 @@ function sendMessagesToServer(messages) {
   };
   swLog('messages sent!', messages);
 
-  return Promise.all(messages.map(message =>
-    fetch('/messages', {
-      method: 'POST',
-      body: JSON.stringify(message),
-      headers: headers
-    }).then(response => response.json())
-  )).catch(err => swLog('unable to send messages to server', err));
+  return Promise.all(mapMessagesToFetches(messages))
+    .catch(err => swLog('unable to send messages to server', err));
+}
+
+function mapMessagesToFetches(messages) {
+  return messages.map(message => sendPost(message).then(response => response.json()));
+}
+
+function sendPost(message) {
+  const msg = {
+    method: 'POST',
+    body: JSON.stringify(message),
+    headers: headers
+  };
+  return fetch('/messages', msg);
 }
 
 function removeMessagesFromOutBox(data) {

@@ -50,7 +50,9 @@ app.post("/messages", (req, res, next) => {
         }
       });
   } catch (error) {
-    console.log('twilio failed, but that\'s ok. We\'ll move along');
+    const msg = 'twilio failed, but that\'s ok. We\'ll move along';
+    console.log(msg);
+    res.status(500).send(msg);
   }
 });
 
