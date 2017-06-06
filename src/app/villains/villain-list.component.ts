@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
   selector: 'pwa-villain-list',
   template: `
     <div class="content">
-      villain-list works!
+      <h3>villain-list works</h3>
       <ul><li *ngFor="let v of villains">{{v.name}}</li></ul>
     </div>
   `,

@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'pwa-home',
   template: `
     <div class="content">
-      <div>home works!</div>
+      <h3>home works!</h3>
 
       <md-input-container>
         <input mdInput placeholder="Phone" [(ngModel)]="message.phone" type="tel">
