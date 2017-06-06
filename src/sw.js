@@ -162,9 +162,8 @@ function getMessagesFromOutbox() {
   return idbKeyval.get(key).then(values => {
     values = values || '[]';
     const messages = JSON.parse(values) || [];
-    swLog('messages retrieved from outbox', messages);
     return messages;
-  }).catch(err => swLog('unable to get messages from outbox', err));
+  });
 }
 
 function mapAndSendMessages(messages) {
@@ -175,13 +174,12 @@ function mapAndSendMessages(messages) {
   );
 }
 
-const headers = {
-  'Accept': 'application/json',
-  'X-Requested-With': 'XMLHttpRequest',
-  'Content-Type': 'application/json'
-};
-
 function sendMessage(message) {
+  const headers = {
+    'Accept': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json'
+  };
   const msg = {
     method: 'POST',
     body: JSON.stringify(message),
@@ -190,7 +188,7 @@ function sendMessage(message) {
   return fetch('/messages', msg).then((response) => {
     swLog('message sent!', message);
     return response;
-   });
+  });
 }
 
 function removeMessagesFromOutBox(response) {
