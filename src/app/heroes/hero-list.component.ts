@@ -5,7 +5,7 @@ import { Http } from '@angular/http';
   selector: 'pwa-hero-list',
   template: `
     <div class="content">
-      hero-list works!
+      <h3>hero-list works</h3>
     <ul><li *ngFor="let h of heroes">{{h.name}}</li></ul>
     </div>
   `,

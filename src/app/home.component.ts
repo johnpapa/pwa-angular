@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'pwa-home',
   template: `
     <div class="content">
-      home works!
+      <h3>home works!</h3>
     </div>
   `,
   styles: []
