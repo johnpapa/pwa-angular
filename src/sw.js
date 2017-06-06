@@ -201,8 +201,60 @@ function removeMessagesFromOutBox(response) {
   return Promise.resolve(true);
 }
 
+
+// -------------------------------------------------------
+// push
+// -------------------------------------------------------
+// https://github.com/web-push-libs/web-push
+self.addEventListener('push', event => {
+  const body = event.data.text() || 'A little push';
+  swLog(`Push received and had this data: "${event.data.text()}"`);
+
+  const title = 'Push Demo';
+  const options = {
+    body: body,
+    icon: 'assets/ng.png',
+    badge: 'assets/ng.png'
+  };
+
+  event.waitUntil(self.registration.showNotification(title, options));
+});
+
+self.addEventListener('notificationclick', event => {
+  swLog('Notification click Received.');
+
+  event.notification.close();
+
+  // We are calling event.waitUntil() again
+  // to ensure the browser doesn't terminate
+  // our service worker before our new window has been displayed.
+  event.waitUntil(clients.openWindow('https://johnpapa.net'));
+});
+
+const applicationServerPublicKey = 'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
+
+self.addEventListener('pushsubscriptionchange', event => {
+  swLog(`'pushsubscriptionchange' event fired.`);
+  const applicationServerKey = urlB64ToUint8Array(applicationServerPublicKey);
+  event.waitUntil(
+    self.registration.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey: applicationServerKey
+    })
+      .then(newSubscription => {
+        // TODO: Send to application server
+        swLog('New subscription: ', newSubscription);
+      })
+  );
+});
+
+
+
+// -------------------------------------------------------
+// logging
+// -------------------------------------------------------
 function swLog(eventName, event) {
-  console.log('Service Worker - ' + eventName);
+  console.log('[Service Worker] ' + eventName);
   if (event) {
     console.log(event);
   }
