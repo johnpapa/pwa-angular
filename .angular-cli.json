@@ -15,6 +15,11 @@
         "api",
         "offline.html",
         {
+          "glob": "workbox-sw.prod.v1.0.1.js",
+          "input": "../node_modules/workbox-sw/build/importScripts/",
+          "output": "./"
+        },
+        {
           "glob": "index.js",
           "input": "./server/",
           "output": "./"
@@ -37,8 +42,7 @@
         "styles/mixin.scss",
         "styles/styles.scss"
       ],
-      "scripts": [
-      ],
+      "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
