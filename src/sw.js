@@ -83,6 +83,7 @@ workboxSW.router.registerRoute(
   workboxSW.strategies.staleWhileRevalidate({ cacheName: 'hero-api' })
 );
 
+// don't need this since we have fallback
 // const networkFirstStrategy = workboxSW.strategies.networkFirst();
 // workboxSW.router.registerRoute('/home/', networkFirstStrategy);
 // workboxSW.router.registerRoute('/heroes/', networkFirstStrategy);
