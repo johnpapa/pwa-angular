@@ -2,7 +2,7 @@ const workboxBuild = require('workbox-build');
 const SRC_DIR = 'src';
 const BUILD_DIR = 'dist';
 
-workboxBuild.injectManifest({
+const input = {
   swSrc: `${SRC_DIR}/sw.js`,
   swDest: `${BUILD_DIR}/sw.js`,
   globDirectory: BUILD_DIR,
@@ -11,13 +11,13 @@ workboxBuild.injectManifest({
     'assets/**/*'
   ],
   globIgnores: [
-    'manifest.js',
     'package.json',
     'index.js',
     'sw.js'
   ],
-  manifestDest: `${BUILD_DIR}/manifest.js`,
   maximumFileSizeToCacheInBytes: 4000000
-}).then(() => {
+};
+
+workboxBuild.injectManifest(input).then(() => {
   console.log('The production service worker has been injected with a precache list.');
 });

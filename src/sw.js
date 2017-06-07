@@ -88,6 +88,12 @@ workboxSW.router.registerRoute('/home/', networkFirstStrategy);
 workboxSW.router.registerRoute('/heroes/', networkFirstStrategy);
 workboxSW.router.registerRoute('/villains/', networkFirstStrategy);
 
+/**
+ * This URL will be used as a fallback if a navigation request can't be fulfilled.
+ * Normally this URL would be precached so it's always available.
+ * This is particularly useful for single page apps where requests should go to a single URL.
+ */
+workboxSW.router.registerNavigationRoute('/index.html');
 
 
 
