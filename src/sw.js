@@ -83,10 +83,10 @@ workboxSW.router.registerRoute(
   workboxSW.strategies.staleWhileRevalidate({ cacheName: 'hero-api' })
 );
 
-const networkFirstStrategy = workboxSW.strategies.networkFirst();
-workboxSW.router.registerRoute('/home/', networkFirstStrategy);
-workboxSW.router.registerRoute('/heroes/', networkFirstStrategy);
-workboxSW.router.registerRoute('/villains/', networkFirstStrategy);
+// const networkFirstStrategy = workboxSW.strategies.networkFirst();
+// workboxSW.router.registerRoute('/home/', networkFirstStrategy);
+// workboxSW.router.registerRoute('/heroes/', networkFirstStrategy);
+// workboxSW.router.registerRoute('/villains/', networkFirstStrategy);
 
 /**
  * This URL will be used as a fallback if a navigation request can't be fulfilled.
