@@ -18,20 +18,8 @@ function registerServiceWorker() {
     navigator.serviceWorker.register('/sw.js').then(reg => {
       registration = reg;
       swLog('Registration successful', registration);
-
       registration.onupdatefound = () => checkServiceWorkerStateChange();
     })
-
-      // .then(() => {
-      //   console.log('navigator.serviceWorker.ready === ', navigator.serviceWorker.ready);
-      //   return navigator.serviceWorker.ready;
-      // })
-
-      // .then(() => {
-      //   console.log('sync registered for send-messages');
-      //   return reg => reg.sync.register('send-messages');
-      // })
-
       .catch(e => console.error('Error during service worker registration:', e));
 
   } else {
@@ -42,22 +30,18 @@ function registerServiceWorker() {
 function checkServiceWorkerStateChange() {
   const installingWorker = registration.installing;
 
-  swLog('Update found, now checking the statechange ...', installingWorker.state);
-
   installingWorker.onstatechange = () => {
     switch (installingWorker.state) {
       case 'installed':
         if (navigator.serviceWorker.controller) {
-          swLog('New or updated content is available.');
+          swLog('New or updated content is available.', installingWorker);
         } else {
-          swLog('Content is now available offline!');
+          swLog('Content is now available offline!', installingWorker);
         }
         break;
-
       case 'redundant':
-        console.error('The installing service worker became redundant.');
+        console.error('The installing service worker became redundant.', installingWorker);
         break;
-
       default:
         swLog(installingWorker.state);
         break;
