@@ -47,7 +47,7 @@ If service worker is not available, the messages are sent online directly from t
 
 When the app is offline, the service worker's sync event does not fire. Once the app goes back online, the sync event fires and all messages found in IndexDB are posted to the server.
 
-### Push Notification
+#### Push Notification
 When the user clicks the "subscribe" button, the service worker will subscribe to a specific push notification from the server using a key. From this point when the server sends a push notification, the service worker will listen for it and show the push notification. Once the user unsubscribes, the push notifications will cease.
 
 <!--### Workbox Caching and Extend with Manual Background Sync and Push
