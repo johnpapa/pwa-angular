@@ -21,6 +21,11 @@ A> Background sync will fire. When online is detected, the sync message fires an
 ## Variations
 There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn moer below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
 
+### Online only
+- *master* branch
+
+The app only runs online. There is no service worker. Push notifications are disabled.
+
 ### Manual Service Worker
 - *sw/manual* branch
 

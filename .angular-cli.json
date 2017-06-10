@@ -10,10 +10,7 @@
       "assets": [
         "assets",
         "favicon.ico",
-        "manifest.json",
-        "sw.js",
         "api",
-        "offline.html",
         {
           "glob": "index.js",
           "input": "./server/",
