@@ -16,22 +16,15 @@ const input = {
   ],
   navigateFallback: '/index.html',
   clientsClaim: true,
-  runtimeCaching: [],
+  runtimeCaching: [
+    {
+      urlPattern: /\/api\/(.*)/,   // /^https:\/\/example\.com\/api/,
+      handler: 'cacheFirst'
+    }
+  ],
   handleFetch: true,
   maximumFileSizeToCacheInBytes: 4000000
 };
-
-workboxSW.router.registerRoute(
-  /\/api\/(.*)/,
-  // workboxSW.strategies.networkFirst({ networkTimeoutSeconds: 1 })
-  workboxSW.strategies.staleWhileRevalidate({ cacheName: 'hero-api' })
-);
-
-const networkFirstStrategy = workboxSW.strategies.networkFirst();
-workboxSW.router.registerRoute('/home/', networkFirstStrategy);
-workboxSW.router.registerRoute('/heroes/', networkFirstStrategy);
-workboxSW.router.registerRoute('/villains/', networkFirstStrategy);
-
 
 workboxBuild.generateSW(input).then(() => {
   console.log('The production service worker has been injected with a precache list.');
