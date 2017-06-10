@@ -4,9 +4,8 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build --prod && npm run generate-sw && cd dist && node index.js",
     "build": "ng build",
-    "build-prod": "ng build --prod && npm run generate-sw",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
