@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json.schemastore.org/web-manifest",
+  "short_name": "Angular PWA",
+  "name": "Angular PWA by John Papa",
+  "description": "Progressive Web Application demonstration with Angular.",
+  "icons": [
+    {
+      "src": "assets/launcher-icon-2x.jpg",
+      "sizes": "96x96",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/launcher-icon-3x.jpg",
+      "sizes": "144x144",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/launcher-icon-4x.jpg",
+      "sizes": "192x192",
+      "type": "image/jpg"
+    },
+    {
+      "src": "assets/launcher-icon-4x.jpg",
+      "sizes": "512x512",
+      "type": "image/jpg"
+    }
+  ],
+  "background_color": "#EEE",
+  "theme_color": "#1565c0",
+  "start_url": "./?utm_source=web_app_manifest",
+  "display": "standalone",
+  "orientation": "any"
+}

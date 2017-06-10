@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng build --prod && cd dist && node index.js",
+    "start": "ng serve",
     "build": "ng build",
+    "build-prod": "ng build --prod && npm run generate-sw",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate-sw": "node generate-sw.js"
   },
   "engines": {
     "node": "6.9.1"
@@ -28,8 +30,11 @@
     "body-parser": "^1.17.2",
     "core-js": "^2.4.1",
     "express": "^4.15.3",
+    "idb-keyval": "^2.3.0",
     "rxjs": "^5.1.0",
     "twilio": "^3.3.0",
+    "workbox-build": "^1.0.1",
+    "workbox-sw": "^1.0.1",
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
@@ -49,6 +54,7 @@
     "protractor": "~5.1.2",
     "ts-node": "~3.0.4",
     "tslint": "~5.3.2",
-    "typescript": "~2.3.3"
+    "typescript": "~2.3.3",
+    "workbox-build": "^1.0.1"
   }
 }
