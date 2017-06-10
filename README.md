@@ -1,22 +1,18 @@
 # PwaAngular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.6.
-
 ## Try It
 
-Run `ng b && cd dist && node index.js` for a dev server.
+Run any example:
+```
+# git checkout [branch-name]
+npm i
+npm start
+```
 
-Enable the twilio texting feature by creating a Twilio account and running
+> Enable the twilio texting feature by creating a Twilio account and running
 `TWILIO_ACCOUNT_SID="sid-goes-here" TWILIO_AUTH_TOKEN="auth-token" TWILIO_PHONE="from-phone" node --inspect=5858 index.js`
 
-Q> When are the files cached?
-A> After the first successful load. The app will cache the files in the browser until the service worker changes.
-
-Q> What happens when I am offline and a route is not found?
-A> An offline page will be displayed when a route is not found.
-
-Q> How do I send messages while offline and not block the user?
-A> Background sync will fire. When online is detected, the sync message fires and messages go on their merry way.
+> Push notifications require a push server
 
 ## Variations
 There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn moer below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
@@ -112,6 +108,3 @@ When the app is offline, the service worker's sync event does not fire. Once the
 
 #### Push Notification
 When the user clicks the "subscribe" button, the service worker will subscribe to a specific push notification from the server using a key. From this point when the server sends a push notification, the service worker will listen for it and show the push notification. Once the user unsubscribes, the push notifications will cease.
-
-
-
