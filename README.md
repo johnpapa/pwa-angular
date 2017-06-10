@@ -17,6 +17,15 @@ npm start
 ## Variations
 There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn moer below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
 
+| branch  | features  |
+|---|---|
+| sw/online-only  | no PWA qualities |
+| sw/workbox/generate  | Generates a service worker with caching, no custom code  |
+| sw/manual  | All custom code for caching, sync, and push  |
+| sw/workbox/inject-cache-and-extend  | Workbox to cache, custom code for sync and push  |
+| master  | same as sw/workbox/inject-cache-and-extend |
+| ng  | wip  |
+
 ### Online only
 - *sw/online-only* branch
 
