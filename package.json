@@ -4,13 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng b --prod && npm run generate-sw && cd dist && node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "generate-sw": "node generate-sw.js",
-    "start-pwa": "ng b --prod && npm run generate-sw && cd dist && node index.js"
+    "generate-sw": "node generate-sw.js"
   },
   "engines": {
     "node": "6.9.1"
