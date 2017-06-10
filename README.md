@@ -24,7 +24,7 @@ There are various techniques in this repo, contained in different branches. Each
 ### Online only
 - *master* branch
 
-The app only runs online. There is no service worker. Push notifications are disabled.
+The app only runs online. There is no service worker `sw.js` and no `manifest.json`. Push notifications are disabled.
 
 ### Manual Service Worker
 - *sw/manual* branch
