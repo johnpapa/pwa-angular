@@ -14,11 +14,12 @@ import { Http } from '@angular/http';
 export class VillainListComponent implements OnInit {
   villains: any;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {}
 
   ngOnInit() {
-    this.http.get('/api/villains.json')
+    this.http
+      .get('/api/villains.json')
       .map(response => response.json())
-      .subscribe(villains => this.villains = villains);
+      .subscribe(villains => (this.villains = villains));
   }
 }

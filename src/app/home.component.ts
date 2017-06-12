@@ -3,7 +3,8 @@ import { Component, OnInit } from '@angular/core';
 declare var idbKeyval;
 declare var Notification;
 const key = 'pwa-messages';
-const applicationServerPublicKey = 'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
+const applicationServerPublicKey =
+  'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
 
 @Component({
   selector: 'pwa-home',
@@ -39,16 +40,19 @@ export class HomeComponent implements OnInit {
   disablePushButton = false;
   pushButtonText = '';
   subscriptionJson = '';
-  message: { phone: string, body: string } = { phone: undefined, body: undefined };
+  message: { phone: string; body: string } = {
+    phone: undefined,
+    body: undefined
+  };
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.setupPush();
   }
 
   isValidMessage() {
-    return (this.message && this.message.phone && this.message.body);
+    return this.message && this.message.phone && this.message.body;
   }
 
   sendMessages() {
@@ -62,7 +66,8 @@ export class HomeComponent implements OnInit {
   }
 
   private addToOutbox(message) {
-    return idbKeyval.get(key)
+    return idbKeyval
+      .get(key)
       .then(data => this.addMessageToArray(data, message))
       .then(messages => idbKeyval.set(key, JSON.stringify(messages)));
   }
@@ -92,7 +97,7 @@ export class HomeComponent implements OnInit {
 
   private sendMessage(message) {
     const headers = {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'X-Requested-With': 'XMLHttpRequest',
       'Content-Type': 'application/json'
     };
@@ -101,15 +106,20 @@ export class HomeComponent implements OnInit {
       body: JSON.stringify(message),
       headers: headers
     };
-    return fetch('/messages', msg).then(response => {
-      console.log('message sent!', message);
-      return response.json();
-    }).then(() => this.removeLastMessageFromOutBox())
-      .catch(err => console.log('server unable to handle the message', message, err))
+    return fetch('/messages', msg)
+      .then(response => {
+        console.log('message sent!', message);
+        return response.json();
+      })
+      .then(() => this.removeLastMessageFromOutBox())
+      .catch(err =>
+        console.log('server unable to handle the message', message, err)
+      );
   }
 
   private registerSyncEvent(reg) {
-    return reg.sync.register('my-pwa-messages')
+    return reg.sync
+      .register('my-pwa-messages')
       .then(() => console.log('Sync - registered for my-pwa-messages'))
       .catch(() => console.log('Sync - registration failed'));
   }
@@ -126,13 +136,6 @@ export class HomeComponent implements OnInit {
   //     .then(() => console.log('Periodic Sync - registered', syncSettings))
   //     .catch(() => console.log('Periodic Sync - registration failed'));
   // }
-
-
-
-
-
-
-
 
   private setupPush() {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
@@ -158,24 +161,24 @@ export class HomeComponent implements OnInit {
 
   private initializeUI() {
     // Set the initial subscription value
-    this.registration.pushManager.getSubscription()
-      .then(subscription => {
-        this.isSubscribed = !(subscription === null);
+    this.registration.pushManager.getSubscription().then(subscription => {
+      this.isSubscribed = !(subscription === null);
 
-        this.updateSubscriptionOnServer(subscription);
+      this.updateSubscriptionOnServer(subscription);
 
-        if (this.isSubscribed) {
-          console.log('User IS subscribed.');
-        } else {
-          console.log('User is NOT subscribed.');
-        }
+      if (this.isSubscribed) {
+        console.log('User IS subscribed.');
+      } else {
+        console.log('User is NOT subscribed.');
+      }
 
-        this.updateBtn();
-      });
+      this.updateBtn();
+    });
   }
 
   private unsubscribeUser() {
-    this.registration.pushManager.getSubscription()
+    this.registration.pushManager
+      .getSubscription()
       .then(subscription => {
         if (subscription) {
           return subscription.unsubscribe();
@@ -210,11 +213,14 @@ export class HomeComponent implements OnInit {
   }
 
   subscribeUser() {
-    const applicationServerKey = this.urlB64ToUint8Array(applicationServerPublicKey);
-    this.registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: applicationServerKey
-    })
+    const applicationServerKey = this.urlB64ToUint8Array(
+      applicationServerPublicKey
+    );
+    this.registration.pushManager
+      .subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: applicationServerKey
+      })
       .then(subscription => {
         console.log('User is subscribed.');
 

@@ -8,20 +8,24 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
   .then(() => registerServiceWorker());
 
 let registration = undefined;
 
 function registerServiceWorker() {
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/sw.js').then(reg => {
-      registration = reg;
-      swLog('Registration successful', registration);
-      registration.onupdatefound = () => checkServiceWorkerStateChange();
-    })
-      .catch(e => console.error('Error during service worker registration:', e));
-
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then(reg => {
+        registration = reg;
+        swLog('Registration successful', registration);
+        registration.onupdatefound = () => checkServiceWorkerStateChange();
+      })
+      .catch(e =>
+        console.error('Error during service worker registration:', e)
+      );
   } else {
     console.warn('Service Worker is not supported');
   }
@@ -34,20 +38,23 @@ function checkServiceWorkerStateChange() {
     switch (installingWorker.state) {
       case 'installed':
         if (navigator.serviceWorker.controller) {
-          swLog('New or updated content is available.', installingWorker);
+          swLog('New or updated content is available', installingWorker);
         } else {
-          swLog('Content is now available offline!', installingWorker);
+          swLog('Content is now available offline', installingWorker);
         }
         break;
       case 'redundant':
-        console.error('The installing service worker became redundant.', installingWorker);
+        console.error(
+          'The installing service worker became redundant',
+          installingWorker
+        );
         break;
       default:
         swLog(installingWorker.state);
         break;
     }
   };
-};
+}
 
 function swLog(eventName, event?) {
   console.log('Service Worker - ' + eventName);
@@ -55,4 +62,3 @@ function swLog(eventName, event?) {
     console.log(event);
   }
 }
-
