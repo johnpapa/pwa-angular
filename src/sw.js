@@ -66,21 +66,20 @@ function fromCache(request) {
   swLog('searching the cache for ' + request.url);
   return caches.open(CACHE).then(cache => {
     swLog('trying to match', request);
-    return cache.match(request).then(matching => {
+    return cache.match(request).then(cacheResponse => {
       // The match() method of the Cache interface returns a Promise
       // that resolves to the Response associated with the
       // first matching request in the Cache object.
       // If no match is found, the Promise resolves to undefined.
-      if (matching) {
-        swLog('found a match', matching);
-        return matching; // || Promise.reject('no-match');
+      if (cacheResponse) {
+        swLog('found a match', cacheResponse);
+        return cacheResponse; // || Promise.reject('no-match');
       } else {
         swLog('match not found. request mode ===  ' + request.mode + ', fetching ...', request);
-        return fetch(request).then(response => {
+        return fetch(request).then(fetchResponse => {
           swLog('updating the cache with ' + request.url);
-          const responseClone = response.clone();
-          cache.put(request, responseClone);
-          return response;
+          cache.put(request, fetchResponse.clone());
+          return fetchResponse;
         }).catch(error => {
           swLog('error while fetching', error);
           if (request.mode === 'navigate') {
