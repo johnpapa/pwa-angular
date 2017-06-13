@@ -90,6 +90,7 @@ Links:
 - https://developers.google.com/web/fundamentals/getting-started/codelabs/push-notifications/
 - https://github.com/GoogleChrome/push-notifications
 - https://github.com/web-push-libs/web-push
+- https://developers.google.com/web/ilt/pwa/lab-integrating-web-push
 - https://web-push-codelab.appspot.com/
 
 
