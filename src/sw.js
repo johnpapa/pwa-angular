@@ -80,7 +80,7 @@ workboxSW.precache([]);
 workboxSW.router.registerRoute(
   /\/api\/(.*)/,
   // workboxSW.strategies.networkFirst({ networkTimeoutSeconds: 1 })
-  workboxSW.strategies.staleWhileRevalidate({ cacheName: 'hero-api' })
+  workboxSW.strategies.cacheFirst({ cacheName: 'hero-api' })
 );
 
 // don't need this since we have fallback
