@@ -53,6 +53,9 @@ export class HomeComponent implements OnInit {
     this.setupPush();
   }
 
+  /**
+   * Background sync with Twilio messaging
+   */
   isValidMessage() {
     return this.message && this.message.phone && this.message.body;
   }
@@ -126,19 +129,9 @@ export class HomeComponent implements OnInit {
       .catch(() => console.log('Sync - registration failed'));
   }
 
-  // private registerPeriodicSyncEvent(reg) {
-  //   console.log('periodic sync registered for my-pwa-messages');
-  //   const syncSettings = {
-  //     tag: 'my-pwa-messages',         // default: ''
-  //     minPeriod: 60 * 1000,           // default: 0
-  //     powerState: 'avoid-draining',   // default: 'auto'
-  //     networkState: 'avoid-cellular'  // default: 'online'
-  //   };
-  //   return reg.periodicSync.register(syncSettings)
-  //     .then(() => console.log('Periodic Sync - registered', syncSettings))
-  //     .catch(() => console.log('Periodic Sync - registration failed'));
-  // }
-
+  /**
+   * Push notifications
+   */
   private setupPush() {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
       navigator.serviceWorker.register('/sw.js').then(reg => {
