@@ -13,9 +13,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home.component';
 import { PageNotFoundComponent } from './page-not-found.component';
+import { PushComponent } from './push.component';
+import { SyncComponent } from './sync.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, PageNotFoundComponent],
+  declarations: [AppComponent, HomeComponent, PageNotFoundComponent, PushComponent, SyncComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
