@@ -42,6 +42,7 @@ export class PushComponent implements OnInit {
       });
     } else {
       console.warn('Push messaging is not supported');
+      this.disablePushButton = true;
       this.pushButtonText = 'Push Not Supported';
     }
   }
