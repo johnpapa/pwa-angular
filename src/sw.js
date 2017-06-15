@@ -197,7 +197,9 @@ self.addEventListener('notificationclick', event => {
   event.waitUntil(clients.openWindow('https://johnpapa.net'));
 });
 
-const applicationServerPublicKey = 'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
+// const applicationServerPublicKey = 'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
+const applicationServerPublicKey =
+  'BNKV7LJ5IFajn46I7FWroeSCMKtyOQPAGguMCn_-mVfyVjr_pvvQn0lW_KMoOAMqEAd4qhFHZhG6GEsDTPSJJ8I';
 
 self.addEventListener('pushsubscriptionchange', event => {
   swLog(`'pushsubscriptionchange' event fired.`);

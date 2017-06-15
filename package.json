@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng build --prod && npm run generate-sw && cd dist && node index.js",
+    "start-dev": "ng build && npm run generate-sw && cd dist && node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",

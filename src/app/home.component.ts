@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 declare var idbKeyval;
 declare var Notification;
 const key = 'pwa-messages';
+// const applicationServerPublicKey =
+//   'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
 const applicationServerPublicKey =
-  'BMZuj1Uek9SeT0myecw8TQxr4dB6Vl4X7c4abMzAA4KR72DsKnVcSpZr6svYgkwNSerKsz7vdZ1kfzwFc0TmH3o';
+  'BNKV7LJ5IFajn46I7FWroeSCMKtyOQPAGguMCn_-mVfyVjr_pvvQn0lW_KMoOAMqEAd4qhFHZhG6GEsDTPSJJ8I';
 
 @Component({
   selector: 'pwa-home',
@@ -237,10 +239,21 @@ export class HomeComponent implements OnInit {
   }
 
   private updateSubscriptionOnServer(subscription) {
-    // TODO: Send subscription to application server
+    const url = 'https://node-web-push-app.azurewebsites.net/subscribe';
 
     if (subscription) {
-      this.subscriptionJson = subscription;
+      this.subscriptionJson = JSON.stringify(subscription);
+      fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: subscription
+      })
+        .then(data => {
+          console.log('Push subscription request succeeded with JSON response', data);
+        })
+        .catch(error => {
+          console.log('Push subscription request failed', error);
+        });
     } else {
       this.subscriptionJson = '';
     }
