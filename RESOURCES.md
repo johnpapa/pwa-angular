@@ -17,6 +17,11 @@ When launched from the user’s home screen, service workers enable a Progressiv
 The App Shell design approach enables the initial load of a mobile web app to provide a basic shell of a app UI, and the content for the app is loaded after.  The App Shell is cached separate from our main app, to enable the shell to load quickly.
 
 
+### Meta Tags
+
+Links
+- [generator icons and meta tags](http://realfavicongenerator.net/)
+
 ### App Manifest
 
 We write a manifest.json file that helps enable features.
@@ -29,6 +34,7 @@ We write a manifest.json file that helps enable features.
 Currently, iOS doesn’t have any additional features here beyond Pin to Homescreen. Chrome on Android added support for installing web apps to the homescreen with a native install banner.
 
 Links
+- [App Manifest generator](https://app-manifest.firebaseapp.com/)
 - https://developers.google.com/web/fundamentals/engage-and-retain/web-app-manifest/
 - https://manifest-validator.appspot.com/
 

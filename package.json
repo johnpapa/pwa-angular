@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng build --prod && npm run generate-sw && cd dist && node index.js",
+    "start-dev": "ng build && npm run generate-sw && cd dist && node index.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -37,7 +38,7 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
-    "@angular/cli": "^1.0.6",
+    "@angular/cli": "^1.1.1",
     "@angular/compiler-cli": "^4.1.3",
     "@types/jasmine": "2.5.45",
     "@types/node": "~6.0.60",

@@ -5,10 +5,7 @@ import { VillainsRoutingModule } from './villains-routing.module';
 import { VillainListComponent } from './villain-list.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    VillainsRoutingModule
-  ],
+  imports: [CommonModule, VillainsRoutingModule],
   declarations: [VillainListComponent]
 })
-export class VillainsModule { }
+export class VillainsModule {}
