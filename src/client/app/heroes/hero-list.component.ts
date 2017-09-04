@@ -8,8 +8,7 @@ import { HttpClient } from '@angular/common/http';
       <h3>hero-list works</h3>
     <ul><li *ngFor="let h of heroes">{{h.name}}</li></ul>
     </div>
-  `,
-  styles: []
+  `
 })
 export class HeroListComponent implements OnInit {
   heroes: any;
