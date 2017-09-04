@@ -4,7 +4,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser');
 const routes = require('./routes');
 
-const root = './dist/public';
+const root = './public';
 const public = process.env.PUBLIC || `${root}`;
 const app = express();
 
@@ -94,7 +94,7 @@ console.log(`serving ${public}`);
 // });
 
 app.get('*', (req, res) => {
-  res.sendFile('dist/index.html', { root: root });
+  res.sendFile('index.html', { root: root });
 });
 
 const port = process.env.PORT || '4201';
