@@ -17,10 +17,8 @@ Or run it in dev mode:
 ```bash
 npm i
 
-# start the Node express API server in dev
-npm run start-server
-# start the ngular app and proxy calls to the API server
-npm run start-proxy
+# start the Node express API server in dev, and the angular app, but no SW
+npm run start-dev-proxy
 ```
 
 
