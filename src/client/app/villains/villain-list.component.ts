@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'pwa-villain-list',
@@ -8,18 +8,14 @@ import { Http } from '@angular/http';
       <h3>villain-list works</h3>
       <ul><li *ngFor="let v of villains">{{v.name}}</li></ul>
     </div>
-  `,
-  styles: []
+  `
 })
 export class VillainListComponent implements OnInit {
   villains: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http
-      .get('/api/villains.json')
-      .map(response => response.json())
-      .subscribe(villains => (this.villains = villains));
+    this.http.get('/api/villains').subscribe(villains => (this.villains = villains));
   }
 }

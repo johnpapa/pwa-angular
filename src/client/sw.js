@@ -3,7 +3,7 @@
 // ------------------------------
 // Pre Cache and Update
 // ------------------------------
-importScripts('./workbox-sw.prod.v1.0.1.js');
+importScripts('./workbox-sw.prod.v1.3.0.js');
 
 /**
  * Create an instance of WorkboxSW.
