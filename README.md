@@ -2,13 +2,30 @@
 
 ## Try It
 
-Run any example:
+**IN FLUX ... WILL WORK SOON**
+
+Run the master branch example:
 
 ```bash
 # git checkout [branch-name]
 npm i
-npm start
+
+# Note: This will be optimized to one command soon
+ng build --prod
+node generate-sw.js
+node dist/index.js
 ```
+
+Or run it in dev mode:
+
+```bash
+npm i
+# start the Node express API server in dev
+npm run start-server
+# start the ngular app and proxy calls to the API server
+npm run start-proxy
+```
+
 
 > Enable the twilio texting feature by creating a Twilio account and running
 `TWILIO_ACCOUNT_SID="sid-goes-here" TWILIO_AUTH_TOKEN="auth-token" TWILIO_PHONE="from-phone" node --inspect=5858 index.js`
