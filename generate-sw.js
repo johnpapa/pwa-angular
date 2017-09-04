@@ -1,6 +1,6 @@
 const workboxBuild = require('workbox-build');
-const SRC_DIR = 'src';
-const BUILD_DIR = 'dist';
+const SRC_DIR = 'src/client';
+const BUILD_DIR = 'dist/public';
 const SW = 'sw.js';
 const globPatterns = [
   '**/*.{js,png,ico,svg,html,css}',

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'pwa-hero-list',
@@ -14,12 +14,11 @@ import { Http } from '@angular/http';
 export class HeroListComponent implements OnInit {
   heroes: any;
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.http
-      .get('/api/heroes.json')
-      .map(response => response.json())
+      .get<string[]>('/api/heroes')
       .subscribe(heroes => (this.heroes = heroes));
   }
 }
