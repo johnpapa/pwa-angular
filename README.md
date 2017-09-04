@@ -2,24 +2,21 @@
 
 ## Try It
 
-**IN FLUX ... WILL WORK SOON**
-
 Run the master branch example:
 
 ```bash
 # git checkout [branch-name]
 npm i
 
-# Note: This will be optimized to one command soon
-ng build --prod
-node generate-sw.js
-node dist/index.js
+# build prod build, generate sw, run the express server out of /dist
+npm start
 ```
 
 Or run it in dev mode:
 
 ```bash
 npm i
+
 # start the Node express API server in dev
 npm run start-server
 # start the ngular app and proxy calls to the API server
