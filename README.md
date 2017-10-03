@@ -28,7 +28,7 @@ npm run start-dev-proxy
 
 ## Variations
 
-There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn moer below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
+There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations in the end result. Learn more below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
 
 | branch  | features  |
 |---|---|
@@ -49,7 +49,7 @@ The app only runs online. There is no service worker `sw.js` and no `manifest.js
 
 - *sw/workbox/generate* branch
 
-The generated service worker contains all of the logic that to accomplish:
+The generated service worker contains all the logic to accomplish:
 
 1. precache of app shell files
 1. fallback to `/offline.html` for unknown routes
@@ -75,7 +75,7 @@ When a route cannot be found in cache nor via fetch, the app redirects to an off
 
 - *sw/manual* branch
 
-The manual service worker contains a `sw.js` file which contains all of the logic that to accomplish:
+The manual service worker contains a `sw.js` file which contains all the logic to accomplish:
 1. precache of app shell files
 2. fallback to `/offline.html` for unknown routes
 3. runtime caching of routes (e.g. `/api/data` routes)
@@ -113,7 +113,7 @@ When the user clicks the "subscribe" button, the service worker will subscribe t
 
 - *sw/workbox/inject-cache-and-extend* branch
 
-The manual service worker contains a `sw.js` file which contains all of the logic that to accomplish:
+The manual service worker contains a `sw.js` file which contains all the logic to accomplish:
 
 1. precache of app shell files
 1. fallback to `/offline.html` for unknown routes
