@@ -28,7 +28,7 @@ npm run start-dev-proxy
 
 ## Variations
 
-There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn moer below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
+There are various techniques in this repo, contained in different branches. Each accomplishes similar tasks, with variations n the end result. Learn more below. All contain `manifest.json`, and variations on the service worker and code to use the servie worker.
 
 | branch  | features  |
 |---|---|
